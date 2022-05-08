@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: yang
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181
+      config:
+        root: /config/dev
+
+  profiles:
+    active: dev
+  config:
+    import: 'optional:zookeeper:'
+server:
+  port: 8081

@@ -1,0 +1,45 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/google/' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter/'}
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'org.yang'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+//    mavenCentral()
+    maven { url 'https://maven.aliyun.com/repository/google' }
+    maven { url 'https://maven.aliyun.com/repository/public/' }
+}
+
+ext {
+    set('springCloudVersion', "2021.0.2")
+}
+
+dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-zookeeper-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-zookeeper-discovery'
+    implementation 'org.apache.zookeeper:zookeeper:3.6.3'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
